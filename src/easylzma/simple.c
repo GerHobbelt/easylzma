@@ -136,7 +136,9 @@ simpleDecompress(elzma_file_format format, const unsigned char * inData,
 
         elzma_decompress_free(&hand);
         *outData = ds.outData;
-        *outLen = ds.outLen;
+        if (outLen) {
+            *outLen = ds.outLen;
+        }
     }
 
     return rc;
