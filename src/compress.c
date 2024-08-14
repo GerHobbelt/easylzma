@@ -69,8 +69,9 @@ elzma_compress_free(elzma_compress_handle * hand)
         }
         free(*hand);
     }
-
-    *hand = NULL;
+    if (hand) {
+        *hand = NULL;
+    }
 }
 
 int
