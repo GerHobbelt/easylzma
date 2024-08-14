@@ -36,17 +36,18 @@ elzma_compress_alloc()
 
     /* "reasonable" defaults for props */
     LzmaEncProps_Init(&(hand->props));
-    hand->props.lc = 3;
-    hand->props.lp = 0;    
-    hand->props.pb = 2;    
-    hand->props.level = 5;
-    hand->props.algo = 1;
-    hand->props.fb = 32;
-    hand->props.dictSize = 1 << 24;
-    hand->props.btMode = 1;
-    hand->props.numHashBytes = 4;
-    hand->props.mc = 32;
-    hand->props.numThreads = 1;
+
+    //hand->props.lc = 3;
+    //hand->props.lp = 0;    
+    //hand->props.pb = 2;    
+    //hand->props.level = 5;
+    //hand->props.algo = 1;
+    //hand->props.fb = 32;
+    //hand->props.dictSize = 1 << 23;
+    //hand->props.btMode = 1;
+    //hand->props.numHashBytes = 4;
+    //hand->props.mc = 32;
+    //hand->props.numThreads = 1;
     hand->props.writeEndMark = 1;
 
     init_alloc_struct(&(hand->allocStruct), NULL, NULL, NULL, NULL);
@@ -66,8 +67,9 @@ elzma_compress_free(elzma_compress_handle * hand)
                             (ISzAlloc *) &((*hand)->allocStruct),
                             (ISzAlloc *) &((*hand)->allocStruct));
         }
-        
+        free(*hand);
     }
+
     *hand = NULL;
 }
 
@@ -296,11 +298,11 @@ elzma_get_dict_size(unsigned long long size)
      * if the size is greater than 8m, we'll divide by two, all of this
      * is based on a quick set of emperical tests on hopefully
      * representative sample data */
-    if ( size > ( 1 << 23 ) ) size >>= 1;
+    if ( size > ( 1 << 26) ) size >>= 1;
 
     while (size >> i) i++;
 
-    if (i > 23) return 1 << 23;
+    if (i > 26) return 1 << 26;
 
     /* now 1 << i is greater than size, let's return either 1<<i or 1<<(i-1),
      * whichever is closer to size */

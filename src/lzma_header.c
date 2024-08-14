@@ -120,7 +120,7 @@ serializeLzmaHeader(unsigned char * hdrBuf,
     /* encode uncompressed size */
     for (i = 0; i < 8; i++) {
         if (hdr->isStreamed) {
-            *(hdrBuf++) = 0xff; 
+            *(hdrBuf++) = 0; // 0xff
         } else {
             *(hdrBuf++) = (unsigned char) (hdr->uncompressedSize >> (i * 8)); 
         }

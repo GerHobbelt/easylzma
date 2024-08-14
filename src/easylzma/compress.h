@@ -24,7 +24,7 @@ extern "C" {
 #define ELZMA_LC_DEFAULT 3
 #define ELZMA_LP_DEFAULT 0
 #define ELZMA_PB_DEFAULT 2
-#define ELZMA_DICT_SIZE_DEFAULT_MAX (1 << 24)
+#define ELZMA_DICT_SIZE_DEFAULT_MAX (1 << 26)
 
 /** an opaque handle to an lzma compressor */
 typedef struct _elzma_compress_handle * elzma_compress_handle;
