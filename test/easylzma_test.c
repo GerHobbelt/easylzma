@@ -151,7 +151,9 @@ static int roundTripTest(elzma_file_format format)
     rc = simpleDecompress(format, compressed, sz,
                           &decompressed, &sz);
 
-    free(compressed);
+    if (compressed != NULL) {
+        free(compressed);
+    }
 
     if (rc != ELZMA_E_OK) {
         if (sz != strlen(sampleData) ||
